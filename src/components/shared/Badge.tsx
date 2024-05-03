@@ -1,5 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import { cn } from '@/utils/common';
+import {  FOCUS_CLASSNAME  } from '@/utils/constants'; 
 
 interface Props {
   text: string;
@@ -18,7 +19,7 @@ export const Badge = ({ text, onClick }: Props) => {
         <button
           type="button"
           onClick={onClick}
-          className="bg-red-500 rounded-tr-lg  rounded-br-lg px-2 ml-3"
+          className={cn("bg-red-500 rounded-tr-lg  rounded-br-lg px-2 ml-3", FOCUS_CLASSNAME)}
           aria-label="remove badge"
         >
           <FaTimes className="text-white" />
