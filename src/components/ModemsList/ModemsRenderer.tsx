@@ -17,7 +17,7 @@ export const ModemsRenderer = ({ data }: Props) => {
           <ModemCard
             key={modem.id}
             id={modem.id}
-            title={modem.name}
+            name={modem.name}
             description={modem.description}
           />
         );

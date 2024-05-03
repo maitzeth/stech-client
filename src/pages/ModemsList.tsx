@@ -38,8 +38,8 @@ const data = [
 const ModemsList = () => {
   return (
     <div className="space-y-8">
-      <div className="flex justify-between items-center">
-        <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center">
+        <div className="flex gap-8 order-2 lg:order-0">
           <p className="text-2xl font-bold">Query:</p>
           <div className="flex gap-2">
             <Badge text="Text" />
@@ -47,7 +47,9 @@ const ModemsList = () => {
             <Badge text="Text" />
           </div>
         </div>
-        <SearchInput onSubmit={() => {}} value="" onChange={e => e} />
+        <div className="lg:order-2 mb-6 lg:mb-0">
+          <SearchInput onSubmit={() => {}} value="" onChange={e => e} />
+        </div>
       </div>
       <hr />
       <ModemsRenderer data={data} />

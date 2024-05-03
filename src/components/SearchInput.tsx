@@ -22,7 +22,6 @@ export const SearchInput = ({ onSubmit, value, onChange, disabled }: Props) => {
       <Button
         type="submit"
         aria-label="Search button"
-        className=""
         disabled={disabled}
       >
         <FaSearch className="text-white" aria-label="lens icon" />
