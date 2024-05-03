@@ -9,7 +9,7 @@ const LazyModemCreate = lazy(() => import('@/pages/ModemsCreate'));
 const AppRouter = () => {
   const routing  = useRoutes([
     {
-      path: ROUTES.basePath,
+      path: ROUTES.home,
       element: <Navigate to={ROUTES.modems} />,
     },
     {

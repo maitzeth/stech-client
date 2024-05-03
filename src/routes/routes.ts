@@ -1,5 +1,5 @@
 export const ROUTES = {
-  basePath: '/',
+  home: '/',
   modems: '/modems',
   modemsCreate: '/modems/create',
   modemsDetails: '/modems/:id',
