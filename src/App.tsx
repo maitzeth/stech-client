@@ -1,12 +1,14 @@
+import AppRouter from '@/routes';
+import { BrowserRouter } from 'react-router-dom';
+import { Suspense } from 'react';
+
 function App() {
   return (
-    <>
-      <div>
-        <h1 className="text-3xl font-bold underline">
-          Hello world!
-        </h1>
-      </div>
-    </>
+    <BrowserRouter>
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <AppRouter />
+      </Suspense>
+    </BrowserRouter>
   );
 }
 

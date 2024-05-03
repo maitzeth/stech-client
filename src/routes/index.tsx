@@ -1,0 +1,40 @@
+import { useRoutes, Navigate } from 'react-router-dom';
+import { ROUTES } from './routes';
+import { lazy } from 'react';
+
+const LazyModemList = lazy(() => import('@/pages/ModemsList'));
+const LazyModemsDetails = lazy(() => import('@/pages/ModemsDetails'));
+const LazyModemCreate = lazy(() => import('@/pages/ModemsCreate'));
+
+const AppRouter = () => {
+  const routing  = useRoutes([
+    {
+      path: ROUTES.basePath,
+      element: <Navigate to={ROUTES.modems} />,
+    },
+    {
+      path: ROUTES.modems,
+      children: [
+        {
+          path: ROUTES.modems,
+          element: <LazyModemList />,
+        },
+        {
+          path: ROUTES.modemsCreate,
+          element: <LazyModemCreate />,
+        },
+        {
+          path: ROUTES.modemsDetails,
+          element: <LazyModemsDetails />,
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <div>404</div>
+    }
+  ]);
+  return routing;
+};
+
+export default AppRouter;
