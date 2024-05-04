@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Header, Footer, Container, ScreenLoading } from '@/components';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from 'sonner'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,7 +18,8 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <main className={`flex flex-col min-h-screen bg-gray-100`}>
+        <Toaster duration={4000} />
+        <main className="flex flex-col min-h-screen bg-gray-100">
           <Header />
             <Suspense fallback={<ScreenLoading />}>
               <Container as="div" className="py-8">
