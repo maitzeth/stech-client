@@ -1,6 +1,6 @@
 import { KeysOf } from '@/types/common';
 
-const modemStatus = {
+export const modemStatus = {
   active: 'active',
   suspended: 'suspended',
   provision: 'provision',

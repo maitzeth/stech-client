@@ -10,3 +10,12 @@ export const getModemsList = async () => {
     handleError(error);
   }
 }
+
+export const getModemById = async (id: string) => {
+  try {
+    const response: AxiosResponse<ModemResponse> = await axiosClient.get(`/cableModems/${id}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+}

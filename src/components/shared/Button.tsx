@@ -15,6 +15,7 @@ type RouterType = LinkProps & {
 
 type ButtonType = HTMLAttributes<HTMLButtonElement> & {
   type: 'button' | 'submit';
+  variant?: 'danger' | 'default';
   onClick?: () => void;
 }
 
@@ -28,13 +29,23 @@ export const Button = (props: Props) => {
   const { type } = props;
   
   if (type === 'button' || type === 'submit') {
-    const { type, onClick, className, disabled, children, ...rest } = props;
+    const {
+      type,
+      onClick,
+      className,
+      disabled,
+      children,
+      variant = 'default',
+      ...rest
+    } = props;
 
     return (
       <button
         type={type}
         onClick={onClick}
-        className={cn(BASE_CLASSNAME, FOCUS_CLASSNAME, className)}
+        className={cn(BASE_CLASSNAME, FOCUS_CLASSNAME, className, {
+          'bg-red-500': variant === 'danger',
+        })}
         disabled={disabled}
         {...rest}
       >
@@ -48,7 +59,7 @@ export const Button = (props: Props) => {
     return (
       <Link
         to={to}
-        className={cn(BASE_CLASSNAME, FOCUS_CLASSNAME, 'text-center', className)}
+        className={cn(BASE_CLASSNAME, FOCUS_CLASSNAME, 'text-center leading-[2]', className)}
         aria-disabled={disabled}
         {...rest}
       >

@@ -11,9 +11,9 @@ const ModemsList = () => {
         <div className="flex gap-8 order-2 lg:order-0">
           <p className="text-2xl font-bold">Query:</p>
           <div className="flex gap-2">
-            <Badge text="Text" />
-            <Badge text="Larger text" onClick={() => {}} />
-            <Badge text="Text" />
+            <Badge type="default" text="Text" />
+            <Badge type="default" text="Larger text" onClick={() => {}} />
+            <Badge type="default" text="Text" />
           </div>
         </div>
         <div className="lg:order-2 mb-6 lg:mb-0">
