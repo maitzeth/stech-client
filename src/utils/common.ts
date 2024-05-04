@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import classNames, { type ArgumentArray } from 'classnames';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,3 +13,14 @@ import { twMerge } from 'tailwind-merge';
 export const cn = (...inputs: ArgumentArray) => {
   return twMerge(classNames(inputs));
 };
+
+export const handleError = (error: unknown): Error => {
+  const errorMsg = (error as Error).message;
+
+  if (error instanceof AxiosError) {
+    const serverMsg = error.response?.data;
+    throw new Error(serverMsg);
+  }
+
+  throw new Error(errorMsg || 'Error desconocido');
+} 
