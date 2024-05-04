@@ -9,7 +9,7 @@ interface Props {
   disabled?: boolean;
 }
 
-export const SearchInput = ({ onSubmit, value, onChange, disabled }: Props) => {
+export const InputSearch = ({ onSubmit, value, onChange, disabled }: Props) => {
   return (
     <form onSubmit={onSubmit} className="flex items-stretch gap-2">
       <InputText

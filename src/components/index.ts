@@ -1,2 +1,3 @@
 export * from './shared';
-export * from './SearchInput';
+export * from './common';
+export * from './layouts';
