@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "date-fns": "^3.6.0",
+    "formik": "^2.4.6",
     "framer-motion": "^11.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +24,8 @@
     "react-router-dom": "^6.23.0",
     "sonner": "^1.4.41",
     "swr": "^2.2.5",
-    "tailwind-merge": "^2.3.0"
+    "tailwind-merge": "^2.3.0",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.8",

@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { ROUTES } from '@/routes/routes';
 import { Badge, Button, ScreenLoading } from '@/components';
-import { FaArrowLeft } from "react-icons/fa6";
 import { formatDate } from '@/utils/dates';
+import { BackButton, PageLayout } from '@/components/layouts/PageLayout';
 
 const ModemsDetails = () => {
   const params = useParams();
@@ -31,23 +31,21 @@ const ModemsDetails = () => {
 
   if (data) {
     return (
-      <div className="space-y-10">
-        <header className="flex justify-between">
-          <div className="flex gap-4">
-            <Button type="router" to={ROUTES.home} aria-label="Go home" className="flex items-center">
-              <FaArrowLeft className="text-white text-lg" aria-label="left arrow icon" />
-            </Button>
-          </div>
-          <div className="flex gap-4">
+      <PageLayout
+        leftContent={
+          <BackButton />
+        }
+        rightContent={
+          <>
             <Button type="router" to="/">
               Edit Modem
             </Button>
             <Button type="button" variant="danger">
               Delete
             </Button>
-          </div>
-        </header>
-        <hr />
+          </>
+        }
+      >
         <section className="space-y-10">
           <div className="flex gap-4 justify-between flex-col lg:flex-row">
             <div className="flex gap-4">
@@ -68,7 +66,7 @@ const ModemsDetails = () => {
             </div>
           </div>
         </section>
-      </div>
+      </PageLayout>
     );
   }
   

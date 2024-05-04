@@ -1,5 +1,5 @@
-import { Badge, SearchInput, BrokenPage } from '@/components';
-import { ModemsRenderer } from '@/components/ModemsList';
+import { Badge, InputSearch, BrokenPage } from '@/components';
+import { ModemsRenderer } from '@/components/modules/ModemsList';
 import { useGetModemList } from '@/hooks/useGetModemList';
 
 const ModemsList = () => {
@@ -17,7 +17,7 @@ const ModemsList = () => {
           </div>
         </div>
         <div className="lg:order-2 mb-6 lg:mb-0">
-          <SearchInput onSubmit={() => {}} value="" onChange={e => e} />
+          <InputSearch onSubmit={() => {}} value="" onChange={e => e} />
         </div>
       </div>
       <hr />

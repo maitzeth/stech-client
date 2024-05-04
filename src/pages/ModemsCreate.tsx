@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { ModemForm } from '@/components/shared/forms/ModemForm';
 
 const ModemsCreate = () => {
   return (
-    <div>ModemsCreate</div>
+    <div>
+      <ModemForm />
+    </div>
   )
 };
 
