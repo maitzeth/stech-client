@@ -2,16 +2,34 @@ import { Button } from '@/components';
 import { ROUTES } from '@/routes/routes';
 import React, { PropsWithChildren } from 'react';
 import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from 'react-router-dom';
 
-type Props = PropsWithChildren & {
+interface LayoutProps extends PropsWithChildren {
   leftContent: React.ReactNode;
   rightContent?: React.ReactNode;
   title?: string;
 }
 
-export const BackButton = () => {
+interface BackButtonprops {
+  isGoBack?: boolean;
+}
+
+export const BackButton = ({ isGoBack }: BackButtonprops) => {
+  const navigate = useNavigate();
+
   return (
-    <Button type="router" to={ROUTES.home} aria-label="Go home" className="flex items-center">
+    <Button
+      type="button"
+      onClick={() => {
+        if (isGoBack) {
+          navigate(-1);
+        } else {
+          navigate(ROUTES.home);
+        }
+      }}
+      aria-label={isGoBack ? 'Go back' : 'Go home'}
+      className="flex items-center"
+    >
       <FaArrowLeft className="text-white text-lg" aria-label="left arrow icon" />
     </Button>
   );
@@ -22,7 +40,7 @@ export const PageLayout = ({
   rightContent,
   children,
   title,
-}: Props) => {
+}: LayoutProps) => {
   return (
     <div className="space-y-10">
       <header className="flex justify-between">

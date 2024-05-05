@@ -17,5 +17,5 @@ export const Navbar = () => {
         </li>
       </ul>
     </nav>
-  )
-}
+  );
+};

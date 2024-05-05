@@ -36,7 +36,7 @@ const ModemsEdit = () => {
   return (
     <PageLayout
       leftContent={
-        <BackButton />
+        <BackButton isGoBack />
       }
       title="Edit Modem"
     >
