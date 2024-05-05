@@ -5,7 +5,8 @@ import { FaArrowLeft } from "react-icons/fa6";
 
 type Props = PropsWithChildren & {
   leftContent: React.ReactNode;
-  rightContent: React.ReactNode;
+  rightContent?: React.ReactNode;
+  title?: string;
 }
 
 export const BackButton = () => {
@@ -16,7 +17,12 @@ export const BackButton = () => {
   );
 };
 
-export const PageLayout = ({ leftContent, rightContent, children }: Props) => {
+export const PageLayout = ({
+  leftContent,
+  rightContent,
+  children,
+  title,
+}: Props) => {
   return (
     <div className="space-y-10">
       <header className="flex justify-between">
@@ -24,7 +30,9 @@ export const PageLayout = ({ leftContent, rightContent, children }: Props) => {
           {leftContent}
         </div>
         <div className="flex gap-4">
-          {rightContent}
+          {title ? (
+            <h1 className="text-3xl font-bold">{title}</h1>
+          ) : rightContent}
         </div>
       </header>
       <hr />

@@ -17,7 +17,7 @@ export const InputSearch = ({ onSubmit, value, onChange, disabled }: Props) => {
         value={value}
         onChange={onChange}
         placeholder="Enter product name..."
-        disabled={disabled}
+        name="search"
       />
       <Button
         type="submit"

@@ -15,7 +15,7 @@ type RouterType = LinkProps & {
 
 type ButtonType = HTMLAttributes<HTMLButtonElement> & {
   type: 'button' | 'submit';
-  variant?: 'danger' | 'default';
+  variant?: 'danger' | 'default' | 'success';
   onClick?: () => void;
 }
 
@@ -45,6 +45,7 @@ export const Button = (props: Props) => {
         onClick={onClick}
         className={cn(BASE_CLASSNAME, FOCUS_CLASSNAME, className, {
           'bg-red-500': variant === 'danger',
+          'bg-green-500': variant === 'success',
         })}
         disabled={disabled}
         {...rest}

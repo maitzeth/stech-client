@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .input__text {
+    @apply w-full rounded-md border border-gray-300 bg-white py-3 px-4 disabled:opacity-75;
+  }
+
+  .input__text--error {
+    @apply border-red-500;
+  }
+}

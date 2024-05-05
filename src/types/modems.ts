@@ -17,3 +17,5 @@ export interface Modem {
 export interface ModemResponse extends Modem {
   id: string;
 }
+
+export interface ModemRequest extends Modem {}
