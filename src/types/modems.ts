@@ -18,4 +18,6 @@ export interface ModemResponse extends Modem {
   id: string;
 }
 
-export interface ModemRequest extends Modem {}
+export interface ModemRequest extends Modem {
+  id?: string;
+}

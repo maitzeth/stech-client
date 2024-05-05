@@ -5,6 +5,7 @@ import { lazy } from 'react';
 const LazyModemList = lazy(() => import('@/pages/ModemsList'));
 const LazyModemsDetails = lazy(() => import('@/pages/ModemsDetails'));
 const LazyModemCreate = lazy(() => import('@/pages/ModemsCreate'));
+const LazyModemEdit = lazy(() => import('@/pages/ModemsEdit'));
 
 const AppRouter = () => {
   const routing  = useRoutes([
@@ -26,6 +27,10 @@ const AppRouter = () => {
         {
           path: ROUTES.modemsDetails,
           element: <LazyModemsDetails />,
+        },
+        {
+          path: ROUTES.modemsEdit,
+          element: <LazyModemEdit />,
         },
       ],
     },

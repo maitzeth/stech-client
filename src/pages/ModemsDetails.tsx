@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
 import { useGetModemById } from '@/hooks/useGetModemById';
-import { useParams, useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import { useParams } from 'react-router-dom';
 import { ROUTES } from '@/routes/routes';
 import { Badge, Button, ScreenLoading } from '@/components';
 import { formatDate } from '@/utils/dates';
@@ -9,17 +7,8 @@ import { BackButton, PageLayout } from '@/components/layouts/PageLayout';
 
 const ModemsDetails = () => {
   const params = useParams();
-  const navigate = useNavigate();
-  const { data, errorMessage, isLoading } = useGetModemById(params.id as string);
-  
-  useEffect(() => {
-    if (errorMessage) {
-      toast.error(errorMessage, {
-        position: 'top-center'
-      });
-      navigate(ROUTES.home);
-    }
-  }, [errorMessage, navigate]);
+  const modemId = params.id as string;
+  const { data, isLoading } = useGetModemById(modemId);
 
   if (isLoading) {
     return (
@@ -37,7 +26,7 @@ const ModemsDetails = () => {
         }
         rightContent={
           <>
-            <Button type="router" to="/">
+            <Button type="router" to={`${ROUTES.modems}/edit/${modemId}`}>
               Edit Modem
             </Button>
             <Button type="button" variant="danger">
