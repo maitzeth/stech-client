@@ -37,3 +37,12 @@ export const updateModem = async (data: ModemRequest) => {
     handleError(error);
   }
 }
+
+export const deleteModem = async (modemId: string) => {
+  try {
+    const response: AxiosResponse<undefined> = await axiosClient.delete(`/cableModems/${modemId}`);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+}
