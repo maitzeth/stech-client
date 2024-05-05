@@ -1,6 +1,7 @@
 import { AxiosError } from 'axios';
 import classNames, { type ArgumentArray } from 'classnames';
 import { twMerge } from 'tailwind-merge';
+import { TEXTS } from '@/utils/constants';
 
 /**
  * UTILITY
@@ -19,8 +20,8 @@ export const handleError = (error: unknown): Error => {
 
   if (error instanceof AxiosError) {
     const serverMsg = error.response?.data;
-    throw new Error(serverMsg);
+    throw new Error(serverMsg ?? TEXTS.errors.badError);
   }
 
-  throw new Error(errorMsg || 'Error desconocido');
+  throw new Error(errorMsg ?? TEXTS.errors.badError);
 } 
