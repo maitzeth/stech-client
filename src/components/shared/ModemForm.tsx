@@ -11,7 +11,7 @@ import {
   InputLabel,
   ErrorLabel
 } from '@/components';
-import { statusOptions } from '@/utils/constants';
+import { TEXTS, statusOptions } from '@/utils/constants';
 import { ModemRequest, ModemResponse } from '@/types/modems';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
@@ -56,7 +56,7 @@ export const ModemForm = ({ onSubmitForm, data }: Props) => {
       const result = await onSubmitForm(parsedValues as ModemRequest);
 
       if (!result) {
-        toast.error('Something weird happened, please try again later.');
+        toast.error(TEXTS.errors.defaultError);
         return;
       }
 

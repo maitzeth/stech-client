@@ -12,3 +12,10 @@ export const statusOptions = Object.keys(modemStatus).map((key) => {
     value: key,
   };
 });
+
+export const TEXTS = {
+  errors: {
+    defaultError: 'Unexpected, please try again.',
+    badError: 'Something weird happened, please try again.',
+  },
+}
