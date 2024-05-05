@@ -10,7 +10,8 @@ import { BackButton, PageLayout } from '@/components/layouts/PageLayout';
 const ModemsDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const { data, errorMessage, isLoading } = useGetModemById(params.id as string);
+  const modemId = params.id as string;
+  const { data, errorMessage, isLoading } = useGetModemById(modemId);
   
   useEffect(() => {
     if (errorMessage) {
@@ -37,7 +38,7 @@ const ModemsDetails = () => {
         }
         rightContent={
           <>
-            <Button type="router" to="/">
+            <Button type="router" to={`${ROUTES.modems}/edit/${modemId}`}>
               Edit Modem
             </Button>
             <Button type="button" variant="danger">
