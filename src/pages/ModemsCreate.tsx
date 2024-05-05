@@ -1,12 +1,19 @@
-import React from 'react';
 import { ModemForm } from '@/components/shared/ModemForm';
 import { BackButton, PageLayout } from '@/components/layouts/PageLayout';
-import { ModemRequest } from '@/types/modems';
+import { ModemRequest, ModemResponse } from '@/types/modems';
+import { useCreateModem } from '@/hooks/useCreateModem';
 
 const ModemsCreate = () => {
-  const handleSubmit = async (values: ModemRequest) => {
-    console.log(values)
-  }
+  const { mutateAsync, errorMessage } = useCreateModem();
+
+  const handleSubmit = async (values: ModemRequest): Promise<ModemResponse | Error | undefined> => {
+    try {
+      const response = await mutateAsync(values);
+      return response;
+    } catch (error) {
+      return error as Error;
+    }
+  };
 
   return (
     <PageLayout
@@ -16,7 +23,10 @@ const ModemsCreate = () => {
       title="Add a new Modem"
     >
       <div className="max-w-[680px] mx-auto pb-10">
-        <ModemForm onSubmitForm={handleSubmit} />
+        <ModemForm
+          errorMessage={errorMessage}
+          onSubmitForm={handleSubmit}
+        />
       </div>
     </PageLayout>
   )

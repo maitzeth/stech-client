@@ -12,41 +12,60 @@ import {
   ErrorLabel
 } from '@/components';
 import { statusOptions } from '@/utils/constants';
-import { ModemRequest } from '@/types/modems';
+import { ModemRequest, ModemResponse } from '@/types/modems';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/routes/routes';
 
 
 interface Props {
-  onSubmitForm: (values: ModemRequest) => void;
+  onSubmitForm: (values: ModemRequest) => Promise<ModemResponse | Error | undefined>;
+  errorMessage?: string;
 }
 
 
 export const ModemForm = ({ onSubmitForm }: Props) => {
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
-      name: 'test',
-      description: 'test',
-      status: 'test',
+      name: '',
+      description: '',
+      status: '',
       validSince: new Date(),
-      tags: ['Tag 2']
+      tags: []
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .max(15, 'Debe tener 15 caracteres o menos')
+        .min(3, 'Must have at least 3 characters')
+        .max(50, 'Must be 50 characters of less')
         .required('Campo requerido'),
       description: Yup.string()
+        .min(10, 'Must have at least 10 characters')
         .max(100, 'Must be 100 characters or less')
         .required('Required'),
       status: Yup.string().required('Required'),
       validSince: Yup.string().required('Required'),
       tags: Yup.array().of(Yup.string().required('Required')).min(1, "Need at least a tag"),
     }),
-    onSubmit: values => {
+    onSubmit: async (values) => {
       const parsedValues = {
         ...values,
         validSince: values.validSince.toISOString(),
       };
 
-      onSubmitForm(parsedValues as ModemRequest);
+      const result = await onSubmitForm(parsedValues as ModemRequest);
+
+      if (result) {
+        if (result instanceof Error) {
+          toast.error(result.message);
+          return;
+        }
+
+        navigate(`${ROUTES.modems}/${result.id}`);
+      } 
+
+      toast.error('Something weird happened, please try again later.');
     },
   });
 
@@ -62,7 +81,7 @@ export const ModemForm = ({ onSubmitForm }: Props) => {
 
   return (
     <Form.Wrapper onSubmit={handleSubmit}>
-      <Form.Fieldset isLoading={isSubmitting} className="space-y-4">
+      <Form.Fieldset isLoading={isSubmitting} className="space-y-8">
         <InputText
           value={values.name}
           id="name"
@@ -103,54 +122,57 @@ export const ModemForm = ({ onSubmitForm }: Props) => {
         />
 
         <FormikProvider value={formik}>
-          <InputLabel>
-            Tags
-          </InputLabel>
-          <FieldArray
-            name="tags"
-            render={(arrayHelpers) => (
-              <div className="space-y-3">
-                {values.tags && values.tags.length > 0 && (
-                  <>
-                    {values.tags.map((tag, index) => {
-                      return (
-                        <div key={index} className="flex gap-1">
-                          <InputText
-                            value={tag}
-                            id={`tags.${index}`}
-                            name={`tags.${index}`}
-                            onChange={handleChange}
-                            error={errors.tags ? errors.tags[index] : undefined}
-                            placeholder="Enter your tag name"
-                            onBlur={handleBlur}
-                            wrapperClassname="flex-grow"
-                          />
-                          <div>
-                            <Button
-                              type="button"
-                              variant="danger"
-                              onClick={() => arrayHelpers.remove(index)}
-                              className="py-[0.9rem]"  
-                            >
-                              Remove
-                            </Button>
+          <div>
+            <InputLabel>
+              Tags
+            </InputLabel>
+            <FieldArray
+              name="tags"
+              render={(arrayHelpers) => (
+                <div className="space-y-3">
+                  {values.tags && values.tags.length > 0 && (
+                    <>
+                      {values.tags.map((tag, index) => {
+                        return (
+                          <div key={index} className="flex gap-1">
+                            <InputText
+                              value={tag}
+                              id={`tags.${index}`}
+                              name={`tags.${index}`}
+                              onChange={handleChange}
+                              error={errors.tags ? errors.tags[index] : undefined}
+                              placeholder="Enter your tag name"
+                              onBlur={handleBlur}
+                              wrapperClassname="flex-grow"
+                            />
+                            <div>
+                              <Button
+                                type="button"
+                                variant="danger"
+                                onClick={() => arrayHelpers.remove(index)}
+                                className="py-[0.9rem]"  
+                              >
+                                Remove
+                              </Button>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                  </>
-                )}
-                <Button
-                  type="button"
-                  onClick={() => arrayHelpers.push('')}
-                  className="w-full"
-                >
-                  Add a tag
-                </Button>
-              </div>
-            )}
-          />
-          {errors.tags && typeof errors.tags === 'string' && <ErrorLabel>{errors.tags}</ErrorLabel>}
+                        );
+                      })}
+                    </>
+                  )}
+                  <Button
+                    type="button"
+                    onClick={() => arrayHelpers.push('')}
+                    className="w-full"
+                    variant="success"
+                  >
+                    Add a tag
+                  </Button>
+                </div>
+              )}
+            />
+            {errors.tags && typeof errors.tags === 'string' && <ErrorLabel>{errors.tags}</ErrorLabel>}
+          </div>
         </FormikProvider>
         <Button type="submit">
           Submit
