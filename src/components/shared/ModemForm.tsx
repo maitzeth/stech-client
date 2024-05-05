@@ -20,20 +20,19 @@ import { ROUTES } from '@/routes/routes';
 
 interface Props {
   onSubmitForm: (values: ModemRequest) => Promise<ModemResponse | Error | undefined>;
-  errorMessage?: string;
+  data?: ModemResponse;
 }
 
-
-export const ModemForm = ({ onSubmitForm }: Props) => {
+export const ModemForm = ({ onSubmitForm, data }: Props) => {
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      description: '',
-      status: '',
+      name: data?.name ?? '',
+      description: data?.description ?? '',
+      status: data?.status ?? '',
       validSince: new Date(),
-      tags: []
+      tags: data?.tags ?? []
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -56,16 +55,17 @@ export const ModemForm = ({ onSubmitForm }: Props) => {
 
       const result = await onSubmitForm(parsedValues as ModemRequest);
 
-      if (result) {
-        if (result instanceof Error) {
-          toast.error(result.message);
-          return;
-        }
+      if (!result) {
+        toast.error('Something weird happened, please try again later.');
+        return;
+      }
 
-        navigate(`${ROUTES.modems}/${result.id}`);
-      } 
+      if (result instanceof Error) {
+        toast.error(result.message);
+        return;
+      }
 
-      toast.error('Something weird happened, please try again later.');
+      navigate(`${ROUTES.modems}/${result.id}`);
     },
   });
 

@@ -28,3 +28,12 @@ export const createModem = async (data: ModemRequest) => {
     handleError(error);
   }
 }
+
+export const updateModem = async (data: ModemRequest) => {
+  try {
+    const response: AxiosResponse<ModemResponse> = await axiosClient.put(`/cableModems/${data.id}`, data);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+}

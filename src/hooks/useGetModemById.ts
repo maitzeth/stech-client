@@ -9,7 +9,6 @@ import { ROUTES } from '@/routes/routes';
 export const useGetModemById = (id: string) => {
   const navigate = useNavigate();
   const { data, error, isLoading } = useQuery(['modems', id], () => getModemById(id));
-
   const errorMsg = error as unknown as { message: string };
 
   useEffect(() => {
@@ -17,6 +16,7 @@ export const useGetModemById = (id: string) => {
       toast.error(errorMsg.message, {
         position: 'top-center'
       });
+
       navigate(ROUTES.home);
     }
   }, [errorMsg, navigate]);
