@@ -4,4 +4,4 @@ export * from './ScreenLoading';
 export * from './Navbar';
 export * from './BrokenPage';
 export * from './InputSearch';
-export * from './forms/ModemForm';
+export * from './ModemForm';
