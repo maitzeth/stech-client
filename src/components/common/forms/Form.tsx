@@ -2,7 +2,7 @@ import { PropsWithChildren, FormEvent } from 'react';
 import { PropsWithClassName } from '@/types/common';
 import { cn } from '@/utils/common';
 
-interface FormProps extends PropsWithChildren {
+interface FormProps extends PropsWithChildren, PropsWithClassName {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
@@ -10,9 +10,9 @@ interface FieldsetProps extends PropsWithChildren, PropsWithClassName {
   isLoading?: boolean;
 }
 
-const FormWrapper = ({ onSubmit, children }: FormProps) => {
+const FormWrapper = ({ onSubmit, children, className }: FormProps) => {
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className={cn(className)}>
       {children}
     </form>
   );

@@ -58,7 +58,7 @@ const ModemsDetails = () => {
                 <h1 className="text-4xl font-bold">{data.name}</h1>
                 <Badge type="status" status={data.status} />
               </div>
-              <div>
+              <div className="space-x-2">
                 {data.tags.map((tag, index) => {
                   return <Badge type="default" key={`tag-element-${index}`} text={tag} />;
                 })}

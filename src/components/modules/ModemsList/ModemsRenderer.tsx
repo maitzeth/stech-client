@@ -1,6 +1,7 @@
 import { ModemCard } from './ModemCard';
 import { ModemResponse } from '@/types/modems';
 import Skeleton from 'react-loading-skeleton';
+import { EmptySearch } from '@/components';
 
 interface Props {
   data: {
@@ -26,7 +27,7 @@ export const ModemsRenderer = ({ data, isLoading }: Props) => {
 
       {data && (
         <>
-          {data.map((modem) => {
+          {data.length > 0 ? data.map((modem) => {
             return (
               <ModemCard
                 key={modem.id}
@@ -35,7 +36,7 @@ export const ModemsRenderer = ({ data, isLoading }: Props) => {
                 description={modem.description}
               />
             );
-          })}
+          }) : <EmptySearch />}
         </>
       )}
     </section>
