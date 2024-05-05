@@ -1,19 +1,22 @@
-import { ModemForm } from '@/components/shared/ModemForm';
+import { ScreenLoading } from '@/components';
 import { BackButton, PageLayout } from '@/components/layouts/PageLayout';
-import { ModemRequest, ModemResponse } from '@/types/modems';
-import { useCreateModem } from '@/hooks/useCreateModem';
+import { useGetModemById } from '@/hooks/useGetModemById';
+import { useParams } from 'react-router-dom';
 
 const ModemsEdit = () => {
-  const { mutateAsync, errorMessage } = useCreateModem();
+  const params = useParams();
+  const modemId = params.id as string;
 
-  const handleSubmit = async (values: ModemRequest): Promise<ModemResponse | Error | undefined> => {
-    try {
-      const response = await mutateAsync(values);
-      return response;
-    } catch (error) {
-      return error as Error;
-    }
-  };
+  const { data, isLoading } = useGetModemById(modemId);
+  console.log(data, isLoading);
+
+  if (isLoading) {
+    return (
+      <div className="py-96 flex items-center justify-center">
+        <ScreenLoading />
+      </div>
+    );
+  }
 
   return (
     <PageLayout
@@ -23,10 +26,10 @@ const ModemsEdit = () => {
       title="Edit Modem"
     >
       <div className="max-w-[680px] mx-auto pb-10">
-        <ModemForm
+        {/* <ModemForm
           errorMessage={errorMessage}
           onSubmitForm={handleSubmit}
-        />
+        /> */}
       </div>
     </PageLayout>
   )
