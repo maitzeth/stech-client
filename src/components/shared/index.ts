@@ -5,3 +5,4 @@ export * from './Navbar';
 export * from './BrokenPage';
 export * from './InputSearch';
 export * from './ModemForm';
+export * from './Dialog';
