@@ -2,9 +2,13 @@ import { AxiosResponse, axiosClient } from '@/services/http';
 import { ModemRequest, ModemResponse } from '@/types/modems';
 import { handleError } from '@/utils/common';
 
-export const getModemsList = async () => {
+export const getModemsList = async (query?: string) => {
   try {
-    const response: AxiosResponse<ModemResponse[]> = await axiosClient.get('/cableModems');
+    const response: AxiosResponse<ModemResponse[]> = await axiosClient.get('/cableModems', {
+      params: {
+        q: query,
+      }
+    });
     return response.data;
   } catch (error) {
     handleError(error);

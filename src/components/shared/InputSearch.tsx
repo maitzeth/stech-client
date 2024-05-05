@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { InputText, Button } from '@/components';
+import { InputText, Button, Form } from '@/components';
 import { FaSearch } from "react-icons/fa";
 
 interface Props {
@@ -11,7 +11,13 @@ interface Props {
 
 export const InputSearch = ({ onSubmit, value, onChange, disabled }: Props) => {
   return (
-    <form onSubmit={onSubmit} className="flex items-stretch gap-2">
+    <Form.Wrapper
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit();
+      }}
+      className="flex items-stretch gap-2"
+    >
       <InputText
         id="search"
         value={value}
@@ -26,6 +32,6 @@ export const InputSearch = ({ onSubmit, value, onChange, disabled }: Props) => {
       >
         <FaSearch className="text-white" aria-label="lens icon" />
       </Button>
-    </form>
+    </Form.Wrapper>
   )
 }
