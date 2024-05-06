@@ -2,6 +2,7 @@ import { ModemCard } from './ModemCard';
 import { ModemResponse } from '@/types/modems';
 import Skeleton from 'react-loading-skeleton';
 import { EmptySearch } from '@/components';
+import { cn } from '@/utils/common';
 
 interface Props {
   data: {
@@ -14,7 +15,9 @@ interface Props {
 
 export const ModemsRenderer = ({ data, isLoading }: Props) => {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <section className={cn({
+      "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6": data && data.length > 0
+    })}>
       {isLoading && (
         <>
           {[...Array(6).keys()].map((_, index) => {
